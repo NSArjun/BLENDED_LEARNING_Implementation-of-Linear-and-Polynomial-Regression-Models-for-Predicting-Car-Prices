@@ -1,4 +1,3 @@
-# BLENDED_LEARNING
 # Implementation-of-Linear-and-Polynomial-Regression-Models-for-Predicting-Car-Prices
 
 ## AIM:
@@ -34,20 +33,18 @@ To write a program to predict car prices using Linear Regression and Polynomial 
    - Visualize residuals to assess model performance.
 
 ## Program:
-```
+```py
 /*
 Program to implement Linear and Polynomial Regression models for predicting car prices.
-Developed by: Arjun N S
-RegisterNumber: 21222323020
-
+Developed by: ARJUN N S
+RegisterNumber: 212223230020
 */
-# Import necessary libraries
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the dataset
@@ -60,6 +57,11 @@ print(data.head())
 # Select relevant features and target variable
 X = data[['enginesize']]  # Predictor
 y = data['price']         # Target
+
+# Standardize the features
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+y = scaler.fit_transform(y.values.reshape(-1, 1))
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -81,7 +83,7 @@ print("Linear Regression R^2 score:", r2_linear)
 
 # ---- Polynomial Regression ----
 # Transform the features for Polynomial Regression (degree = 2)
-poly = PolynomialFeatures(degree=2)
+poly = PolynomialFeatures(degree=3)
 X_train_poly = poly.fit_transform(X_train)
 X_test_poly = poly.transform(X_test)
 
@@ -118,12 +120,18 @@ plt.ylabel('Price')
 plt.legend()
 plt.show()
 
+
+
 ```
 
 ## Output:
-<img width="803" alt="Screenshot 2024-10-06 at 8 41 08 PM" src="https://github.com/user-attachments/assets/5c7f9995-1a09-4ef4-b512-40ae9f74fa05">
-<img width="803" alt="Screenshot 2024-10-06 at 8 46 12 PM" src="https://github.com/user-attachments/assets/25b34886-6c05-41ce-bac2-9b3f2f0b5b70">
-<img width="780" alt="Screenshot 2024-10-06 at 8 46 21 PM" src="https://github.com/user-attachments/assets/9eed5e90-e00a-460d-a2d5-d9d07d9910db">
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-3.png)
+
 
 
 ## Result:
